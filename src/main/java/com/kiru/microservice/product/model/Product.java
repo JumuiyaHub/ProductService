@@ -21,6 +21,4 @@ public class Product {
     private String description;
     private BigDecimal price;
 
-
-    // Additional fields can be added as needed
 }
