@@ -19,9 +19,10 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      # Debug repo structure to confirm correct path
       - name: Debug repo structure
-        run: ls -R
+        run: |
+          pwd
+          ls -R
 
       - name: Set up JDK 21 with Maven cache
         uses: actions/setup-java@v4
@@ -29,7 +30,7 @@ jobs:
           distribution: temurin
           java-version: 21
           cache: maven
-          cache-dependency-path: productservice/pom.xml   # ✅ fixed path
+          cache-dependency-path: pom.xml
 
       - name: Verify Docker
         run: |
@@ -39,5 +40,4 @@ jobs:
 
       - name: Build and Run Tests
         run: |
-          cd productservice
           ./mvnw -B clean verify -Dsurefire.forkCount=1 -Dsurefire.reuseForks=true
