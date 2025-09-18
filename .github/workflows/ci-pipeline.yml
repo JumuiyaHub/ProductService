@@ -33,5 +33,6 @@ jobs:
           docker run --rm hello-world
       
       - name: Build and Run Tests
-        run: ./mvnw -B clean verify -Dsurefire.forkCount=1 -Dsurefire.reuseForks=true
-        working-directory: productservice
+        run: |
+          cd productservice
+          ./mvnw -B clean verify -Dsurefire.forkCount=1 -Dsurefire.reuseForks=true
