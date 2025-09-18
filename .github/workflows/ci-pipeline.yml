@@ -18,22 +18,26 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
-      
+
+      # Debug repo structure to confirm correct path
+      - name: Debug repo structure
+        run: ls -R
+
       - name: Set up JDK 21 with Maven cache
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
           cache: maven
-          cache-dependency-path: ProductService/productservice/pom.xml
+          cache-dependency-path: productservice/pom.xml   # ✅ fixed path
 
       - name: Verify Docker
         run: |
           docker --version
           docker info
           docker run --rm hello-world
-      
+
       - name: Build and Run Tests
         run: |
-          cd ProductService/productservice
+          cd productservice
           ./mvnw -B clean verify -Dsurefire.forkCount=1 -Dsurefire.reuseForks=true
