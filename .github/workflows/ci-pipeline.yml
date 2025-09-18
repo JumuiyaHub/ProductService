@@ -19,12 +19,13 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v4
       
-      - name: Set up JDK 21
+      - name: Set up JDK 21 with Maven cache
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 21
           cache: maven
+          cache-dependency-path: productservice/pom.xml
       
       - name: Verify Docker
         run: |
